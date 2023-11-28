@@ -1,0 +1,3 @@
+jwtSecret: Q/LbQIwpk749jIkf1xN3EQ61x4YlPSNRDq4oEhohiZdRdT0gv11aEUpBRwjJbgOEu41NOejwGe9pPGdvr1Hhnw==
+
+jwtExpirationMs: 300_000
