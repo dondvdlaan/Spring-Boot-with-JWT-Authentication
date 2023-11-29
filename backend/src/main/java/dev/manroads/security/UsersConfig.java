@@ -27,7 +27,7 @@ public class UsersConfig {
                 .roles("USER2") // No roles for now
                 .build();
 
-        return new InMemoryUserDetailsManager(testUser);
+        return new InMemoryUserDetailsManager(testUser, testUser2);
     }
 
     @Bean

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import '../App.css';
 import { ApiJavaSimplified } from '../shared/ApiJavaBE';
+import axiosInstance from '../shared/ApiIntercept'
+import { useNavigate } from 'react-router-dom';
 
 /**
  * 
@@ -8,17 +10,13 @@ import { ApiJavaSimplified } from '../shared/ApiJavaBE';
 function LoginJava() {
 
   const [error, setError] = useState(" ")
-
+  const navigate  = useNavigate();
 
   // ---- Event triggers ----
-  const onAuthWirgJWT = () => {
+  const onAuthWithJWT = () => {
 
-    const headers = {
-      'Content-type': 'application/json',
-      'Authorization': 'Bearer ' + localStorage.getItem("JWT")
-    }
 
-    ApiJavaSimplified("GET", "test", headers)
+    axiosInstance.get("/test")
       .then((res: { data: any; }) => {
 
         console.log("\n *********** Login **********")
@@ -26,27 +24,33 @@ function LoginJava() {
         console.log("onJAVAAuth: ", res.data)
 
       })
+      .catch((err: any) => {
+        console.log("Test err", err)
+        
+        // Check if token in storage is empty, then direct to login page
+        if(localStorage.getItem("JWT") == null)  navigate("/login")
+      })
+      
   }
 
   const onLogin = () => {
-
-    const headers = {
-      'Content-type': 'application/json',
-    }
 
     const data = {
       "userName": "test",
       "passWord": "testPW"
     }
 
-    ApiJavaSimplified("POST", "login", headers, data)
+    axiosInstance.post("/login", data)
       .then((res: { data: any; }) => {
 
         console.log("\n *********** Login **********")
         console.log("RAW onJAVAAuth: ", res)
         console.log("onJAVAAuth: ", res.data)
 
-        if (res.data) localStorage.setItem("JWT", res.data);
+        if (res.data) {
+          localStorage.setItem("jwt", res.data.token);
+          localStorage.setItem("refreshToken", res.data.refreshToken);
+        }
 
       })
       .catch((err: any) => console.log("Login err", err))
@@ -58,7 +62,7 @@ function LoginJava() {
         <h2>Login Java</h2>
         <p>JWT Authentication</p>
         <button onClick={onLogin} type="button">Login</button>
-        <button onClick={onAuthWirgJWT} type="button">Test with JWT Authentication</button>
+        <button onClick={onAuthWithJWT} type="button">Test with JWT Authentication</button>
         <p>{error}</p>
       </div>
     </>

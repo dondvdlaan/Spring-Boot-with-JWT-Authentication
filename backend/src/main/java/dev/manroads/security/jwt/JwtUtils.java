@@ -14,6 +14,9 @@ import org.springframework.stereotype.Service;
 import java.security.Key;
 import java.util.Date;
 
+/**
+ * Class with methods for generating, extracting username from and validating a JWT token
+ */
 @Service
 public class JwtUtils {
 
@@ -29,7 +32,10 @@ public class JwtUtils {
         this.jwtSecret = jwtSecret;
         this.jwtExpirationMs = jwtExpirationMs;
     }
-    // ---- Methodes ----
+    // ---- Methods ----
+    public String generateJWTToken(UserDetails userDetails){
+        return generateJWTFromUsername(userDetails.getUsername());
+    }
 
     /**
      * Generate JWT token
@@ -37,15 +43,13 @@ public class JwtUtils {
      * @param authentication : Authentication object from user login
      * @return String           : jwt token
      */
-    public String generateJWTToken(Authentication authentication) throws WeakKeyException {
+    public String generateJWTFromUsername(String userNmae) throws WeakKeyException {
 
-        // Retrieve user details
-        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
 
         // Compose jwt token
         String jwt = Jwts
                 .builder()
-                .subject(userDetails.getUsername())
+                .subject(userNmae)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))
                 .signWith(generateKey())

@@ -1,3 +1,10 @@
+### JWT data ###
 jwtSecret: Q/LbQIwpk749jIkf1xN3EQ61x4YlPSNRDq4oEhohiZdRdT0gv11aEUpBRwjJbgOEu41NOejwGe9pPGdvr1Hhnw==
+jwtExpirationMs: 20_000
+refreshExpirationMs: 30_000
 
-jwtExpirationMs: 300_000
+### Logger level ###
+logging:
+  level:
+    root: INFO
+    dev.manyroads: DEBUG
