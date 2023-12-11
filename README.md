@@ -8,6 +8,9 @@ error is picked up by the axios interceptor at the frontend and a token refresh 
 backend will check the refresh token and if valid and not expired, will issue a new token and refresh token back to
 the frontend.</p>
 
+<p>If both the JWT token and the refresh token have expired, the frontend will prompt the user for her/his
+credentials</p>
+
 <h3>Summary</h3>
 <ul>
   <li>Backend: Java Spring Security</li>

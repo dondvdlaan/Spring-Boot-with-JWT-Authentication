@@ -3,10 +3,12 @@ import axios from "axios";
 /**
  * Create axios instance
  */
+
 const instance = axios.create({
     baseURL: "http://localhost:8080",
     headers: {
         "Content-Type": "application/json",
+        withCredentials: true
     },
 });
 
@@ -40,7 +42,7 @@ instance.interceptors.response.use(
     (res) => {
         return res;
     },
-    async (err) => {
+    async (err: any) => {
 
         // Remember origial config
         const originalConfig = err.config;
@@ -53,9 +55,9 @@ instance.interceptors.response.use(
             console.log("in if url!= login")
 
             // Check if Token expired
-            if (err.response.status === 403 && !originalConfig._retry) {
+            if (err.response.status === 401 && !originalConfig._retry) {
 
-                console.log("in err.response.status === 403")
+                console.log("in err.response.status === 401")
 
                 // Remember first 401 token expired error to avoid looping between fr and be
                 originalConfig._retry = true;
@@ -71,14 +73,23 @@ instance.interceptors.response.use(
 
                     console.log("rs.data: ", rs.data)
 
-                    const { token } = rs.data;
+                    // Store renewed token
+                    const token = rs.data.token;
                     localStorage.setItem("jwt", token);
+
+                    // Store renewed refresh token
+                    const refreshToken = rs.data.refreshToken;
+                    localStorage.setItem("refreshToken", refreshToken);
 
                     // Continue with original config in the response
                     return instance(originalConfig);
 
+
+
                 } catch (_error) {
                     console.log("Refresh token failed")
+                    localStorage.removeItem("refreshToken")
+
                     return Promise.reject(_error);
                 }
             }

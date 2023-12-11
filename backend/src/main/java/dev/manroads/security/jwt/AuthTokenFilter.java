@@ -19,6 +19,10 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 
+/**
+ * JWT Authentication filter is set before the regular UsernamePasswordAuthenticationFilter to authenticate users
+ * with valid JWT token
+ */
 @Component
 public class AuthTokenFilter extends OncePerRequestFilter {
 
@@ -26,9 +30,6 @@ public class AuthTokenFilter extends OncePerRequestFilter {
 
     private final JwtUtils jwtUtils;
     private final UserDetailsService userDetailsService;
-
-    //private InMemoryUserDetailsManager userDetailsManager;
-
 
     public AuthTokenFilter(JwtUtils jwtUtils, UserDetailsService userDetailsService) {
         this.jwtUtils = jwtUtils;
@@ -46,33 +47,34 @@ public class AuthTokenFilter extends OncePerRequestFilter {
         String token = parseJwt(request);
         logger.info("token: " + token);
 
-        // Validate token and if ok, extract userName
-        if (token != null && jwtUtils.validateJwtToken(token)) {
+        try {
 
-            String userName = jwtUtils.getUserNameFromJwtToken(token);
-            logger.info("userName: " + userName);
+            // Validate token and if ok, extract userName
+            if (token != null && jwtUtils.validateJwtToken(token)) {
 
-            // Retrieve UserDetails from userName
-            UserDetails userDetails = userDetailsService.loadUserByUsername(userName);
-            logger.info("userDetails: " + userDetails.getUsername());
+                String userName = jwtUtils.getUserNameFromJwtToken(token);
+                logger.info("userName: " + userName);
 
-            // Set the authentication
-            UsernamePasswordAuthenticationToken authentication =
-                    new UsernamePasswordAuthenticationToken(
-                            userDetails,
-                            null,
-                            userDetails.getAuthorities());
+                // Retrieve UserDetails from userName
+                UserDetails userDetails = userDetailsService.loadUserByUsername(userName);
+                logger.info("userDetails: " + userDetails.getUsername());
 
-            // coverter of the request in to authentication
-            authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                // Set the authentication
+                UsernamePasswordAuthenticationToken authentication =
+                        new UsernamePasswordAuthenticationToken(
+                                userDetails,
+                                null,
+                                userDetails.getAuthorities());
 
-            // Update SecurityContextHolder with authentication
-            SecurityContextHolder.getContext().setAuthentication(authentication);
+                // coverter of the request in to authentication
+                authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+
+                // Update SecurityContextHolder with authentication
+                SecurityContextHolder.getContext().setAuthentication(authentication);
+            }
+        } catch (Exception ex) {
+            logger.error("Cannot set user authentication: {}", ex);
         }
-        else {
-            logger.info("Validation failed");
-        }
-
 
         filterChain.doFilter(request, response);
     }

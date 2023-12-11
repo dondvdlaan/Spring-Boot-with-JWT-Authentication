@@ -19,31 +19,35 @@ export const Login = (props: Props) => {
     const navigate = useNavigate();
 
 
-
     // ****************** Functions ****************** 
     const userLogin = (data: any) => {
 
-        console.log("data:", data)
+        console.log("userLogin data:", data)
+
         // Check user input against DB
         axiosInstance.post("/login", data)
             .then((resp: any) => {
-                if (resp.data.errors) setLoginErr(resp.data.errors[0]);
+                if (resp.data.errors) {
+
+                    console.log("/login error: ", resp.data)
+
+                    setLoginErr(resp.data.errors[0]);
+                }
 
                 else if (resp.data) {
-                    // Create the localStorage for the user
-                    console.log("resp.data: ", resp.data)
-                    //localStorage.jwt = resp.data.token;
+
+                    console.log("Succesful login resp.data: ", resp.data)
+                    // Create the localStorage for jwt token
                     localStorage.setItem("jwt", resp.data.token);
-                    //localStorage.refreshToken = resp.data.refreshToken;
+
+                    // Create the localStorage for refreshToken
                     localStorage.setItem("refreshToken", resp.data.refreshToken);
-                    //localStorage.userRev = resp.data.userRev;
-                    //localStorage.loggedIn = true;
 
                     // Respond to setToken in requesting page
-                    //props.setToken(resp.data.jwt)
-                    props.setToken(resp.data["jwt"])
-                    // Refresh page
-                    navigate(0)
+                    props.setToken(resp.data.token)
+                    props.setToken(resp.data["token"])
+                    // Refresh page so that requesting page checks login
+                    //navigate(0)
 
                 }
             }
@@ -66,7 +70,7 @@ export const Login = (props: Props) => {
 
         <section className="h-screen bg-yellow-50">
             <div className="px-6 h-full text-gray-800">
-                <h1 className="text-5xl text-center pt-3">REACT AUTHENTICATION</h1>
+                <h1 className="text-5xl text-center pt-3">SPRING SECURITY AND JWT AUTHENTICATION</h1>
                 <div className="flex xl:justify-center lg:justify-between justify-center items-center flex-wrap h-full g-6" >
                     <div className="xl:ml-20 xl:w-5/12 lg:w-5/12 md:w-8/12 mb-12 md:mb-0">
                         <form

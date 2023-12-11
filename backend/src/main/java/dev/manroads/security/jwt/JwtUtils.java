@@ -23,18 +23,16 @@ public class JwtUtils {
     final static Logger logger = LoggerFactory.getLogger(JwtUtils.class);
 
     private final String jwtSecret;
-    private final int jwtExpirationMs;
 
     public JwtUtils(
-            @Value("${jwtSecret}") String jwtSecret,
-            @Value("${jwtExpirationMs}") int jwtExpirationMs) {
+            @Value("${jwtSecret}") String jwtSecret) {
 
         this.jwtSecret = jwtSecret;
-        this.jwtExpirationMs = jwtExpirationMs;
     }
+
     // ---- Methods ----
-    public String generateJWTToken(UserDetails userDetails){
-        return generateJWTFromUsername(userDetails.getUsername());
+    public String generateJWTToken(UserDetails userDetails, int jwtExpirationMs) {
+        return generateJWTFromUsername(userDetails.getUsername(), jwtExpirationMs);
     }
 
     /**
@@ -43,13 +41,16 @@ public class JwtUtils {
      * @param authentication : Authentication object from user login
      * @return String           : jwt token
      */
-    public String generateJWTFromUsername(String userNmae) throws WeakKeyException {
+    public String generateJWTFromUsername(
+            String userName,
+            int jwtExpirationMs)
+            throws WeakKeyException {
 
 
         // Compose jwt token
         String jwt = Jwts
                 .builder()
-                .subject(userNmae)
+                .subject(userName)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))
                 .signWith(generateKey())
@@ -79,8 +80,9 @@ public class JwtUtils {
 
     /**
      * Retrieve userName from the JWT token
-     * @param   String  : token
-     * @return  String  : userName
+     *
+     * @param String : token
+     * @return String  : userName
      */
     public String getUserNameFromJwtToken(String token) {
 
@@ -94,10 +96,14 @@ public class JwtUtils {
 
     /**
      * Validating the JWT token
+     *
      * @param authToken : JWT token
      * @return boolean  : true validated / false token not valid
      */
     public boolean validateJwtToken(String authToken) {
+
+        logger.info("Validating token");
+
         try {
             Jwts.parser().setSigningKey(generateKey()).build().parse(authToken);
             return true;

@@ -1,10 +1,27 @@
 ### JWT data ###
 jwtSecret: Q/LbQIwpk749jIkf1xN3EQ61x4YlPSNRDq4oEhohiZdRdT0gv11aEUpBRwjJbgOEu41NOejwGe9pPGdvr1Hhnw==
-jwtExpirationMs: 20_000
-refreshExpirationMs: 30_000
+jwtExpirationMs: 30_000
+refreshExpirationMs: 40_000
 
 ### Logger level ###
 logging:
   level:
     root: INFO
     dev.manyroads: DEBUG
+
+server:
+  port: 8080
+
+# Strongly recommend to set this property to "none" in a production environment!
+spring.jpa.hibernate.ddl-auto: update
+
+spring.datasource:
+  url: jdbc:mysql://localhost/auth-db
+  username: user
+  password: pwd
+
+---
+spring.config.activate.on-profile: docker
+
+spring.datasource:
+  url: jdbc:mysql://mysql/auth-db

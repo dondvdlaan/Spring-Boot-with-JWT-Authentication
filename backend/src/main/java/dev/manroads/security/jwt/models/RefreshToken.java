@@ -1,38 +1,49 @@
 package dev.manroads.security.jwt.models;
 
+import jakarta.persistence.*;
+
 import java.time.Instant;
 import java.util.Date;
 
-public class RefreshToken {
+@Entity
+public class
+RefreshToken {
 
-    User user;
-    String token;
-    Instant expiryDate;
+    @Id
+    @GeneratedValue
+    private int refreshTokenID;
+    private String refreshToken;
 
     public RefreshToken() {
     }
 
-    public User getUser() {
-        return user;
+    public RefreshToken(String refreshToken) {
+        this.refreshToken = refreshToken;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    int getRefreshTokenID() {
+        return refreshTokenID;
     }
 
-    public String getToken() {
-        return token;
+    public void setRefreshTokenID(int refreshTokenID) {
+        this.refreshTokenID = refreshTokenID;
     }
 
-    public void setToken(String token) {
-        this.token = token;
+
+    public String getRefreshToken() {
+        return refreshToken;
     }
 
-    public Instant getExpiryDate(Date date) {
-        return expiryDate;
+    public void setRefreshToken(String refreshToken) {
+        this.refreshToken = refreshToken;
     }
 
-    public void setExpiryDate(Instant expiryDate) {
-        this.expiryDate = expiryDate;
+
+    @Override
+    public String toString() {
+        return "RefreshToken{" +
+                "refreshTokenID=" + refreshTokenID +
+                ", refreshToken='" + refreshToken + '\'' +
+                '}';
     }
 }
