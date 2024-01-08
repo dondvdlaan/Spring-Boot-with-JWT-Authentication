@@ -11,11 +11,19 @@ and refresh token back to the frontend.</p>
 <p>If both the JWT token and the refresh token have expired, the frontend will prompt the user for her/his
 credentials</p>
 
+<h3>Backend for synchronous and asynchronous communication</h3>
+
+<p>Two types of backends are available: one for synchronous communication on the Spring Tomcat server and on
+for asynchronous communication on the Spring Reactor Netty server. The main difference between the two approaches is
+that the Reactor Netty server is not based anymore on the Java Servlet container, but an event-driven non-blocking 
+server framework. Spring uses the Reactor library for endpoint communication, communication between classes and 
+communication with databases for example.</p>
+
 <h3>Summary</h3>
 <ul>
   <li>Backend: Java Spring Security</li>
   <li>Frontend: REACT</li>
-  <li>Database: MySQL</li>
+  <li>Database: MySQL, MongoDB</li>
   <li>Containers: Docker</li>
 </ul>
 
