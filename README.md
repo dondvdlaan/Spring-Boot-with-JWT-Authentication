@@ -15,7 +15,7 @@ credentials</p>
 <ul>
   <li>Backend: Java Spring Security</li>
   <li>Frontend: REACT</li>
-  <li>Database: MySQL</li>
+  <li>Database: MySQL, MongoDB</li>
   <li>Containers: Docker</li>
 </ul>
 
