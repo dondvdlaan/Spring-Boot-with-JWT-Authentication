@@ -6,7 +6,7 @@ import { Dashboard } from "./Dashboard";
 
 /**
  * Routing function, connecting path to modules
- * @returns 
+ * 
  */
 export default function Routing(): ReactElement {
     return (
