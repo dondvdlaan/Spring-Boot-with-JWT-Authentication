@@ -23,8 +23,8 @@ export const Dashboard = () => {
     // ---- Event triggers ----
     const onTest = () => {
 
-        console.log(" in /test")
-        axiosInstance.get("/test")
+        console.log(" in /test2")
+        axiosInstance.get("/test2")
             .then((res: { data: any; }) => {
 
                 console.log("\n *********** Testing**********")
@@ -35,7 +35,7 @@ export const Dashboard = () => {
 
                 // Check if token in storage is empty, then direct to login page
                 if (localStorage.getItem("jwt") == null){
-                    console.log("in if" );
+                    console.log("onTest catch in if" );
                     navigate(0)
                 } 
             })

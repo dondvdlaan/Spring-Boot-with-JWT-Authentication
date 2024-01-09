@@ -21,7 +21,7 @@ instance.interceptors.request.use(
         // Retrieve token from storage
         console.log("interceptors.request Loading jwt")
         const token = localStorage.getItem("jwt");
-        
+
         // Compose header
         if (token) {
             config.headers["Authorization"] = 'Bearer ' + token;
@@ -53,19 +53,21 @@ instance.interceptors.response.use(
         if (originalConfig.url !== "/login" && err.response) {
 
             console.log("in if url!= login")
+            console.log("originalConfig._retryJwt", originalConfig._retryJwt)
 
             // Check if Token expired
-            if (err.response.status === 401 && !originalConfig._retry) {
+            if (err.response.status === 401 && !originalConfig._retryJwt) {
 
                 console.log("in err.response.status === 401")
 
-                // Remember first 401 token expired error to avoid looping between fr and be
-                originalConfig._retry = true;
+                // Remember first 401 token expired error to avoid looping between fe and be
+                originalConfig._retryJwt = true;
 
                 // Clear token from local storage
                 localStorage.removeItem("jwt")
 
                 try {
+
                     // Request new token by way of refreshToken
                     const rs = await instance.post("/refreshtoken", {
                         refreshToken: localStorage.getItem("refreshToken"),
@@ -74,7 +76,7 @@ instance.interceptors.response.use(
                     console.log("rs.data: ", rs.data)
 
                     // Store renewed token
-                    const token = rs.data.token;
+                    const token = rs.data.jwtToken;
                     localStorage.setItem("jwt", token);
 
                     // Store renewed refresh token
@@ -84,19 +86,18 @@ instance.interceptors.response.use(
                     // Continue with original config in the response
                     return instance(originalConfig);
 
-
-
                 } catch (_error) {
                     console.log("Refresh token failed")
                     localStorage.removeItem("refreshToken")
+                    localStorage.removeItem("jwt")
 
                     return Promise.reject(_error);
                 }
             }
         }
-
         return Promise.reject(err);
     }
+
 );
 
 export default instance;

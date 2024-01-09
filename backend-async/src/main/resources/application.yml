@@ -1,0 +1,34 @@
+### JWT data ###
+jwtSecret: Q/LbQIwpk749jIkf1xN3EQ61x4YlPSNRDq4oEhohiZdRdT0gv11aEUpBRwjJbgOEu41NOejwGe9pPGdvr1Hhnw==
+jwtExpirationMs: 20_000
+refreshExpirationMs: 30_000
+
+### Logger level ###
+logging:
+  level:
+    root: WARN
+    dev.manyroads: DEBUG
+
+### MySQL DB ###
+# Strongly recommend to set this property to "none" in a production environment!
+spring.jpa.hibernate.ddl-auto: update
+
+spring.datasource:
+  url: jdbc:mysql://localhost/refresh-db
+  username: user
+  password: pwd
+
+### Mongo DB ###
+spring.data.mongodb:
+  host: localhost
+  port: 27017
+  database: user-db
+
+---
+spring.config.activate.on-profile: docker
+
+server.port: 8080
+
+spring.datasource.url: jdbc:mysql://mysql/refresh-db
+
+spring.data.mongodb.host: mongodb

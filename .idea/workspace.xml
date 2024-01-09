@@ -4,12 +4,37 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="86a66c9f-247d-4d68-8abc-3b34f2c091cc" name="Changes" comment="">
+    <list default="true" id="0db27b02-5508-4bfe-8ba8-17ed3d9179a8" name="Changes" comment="Directory name change to backend-sync">
+      <change afterPath="$PROJECT_DIR$/backend-async/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend-async/src/main/java/dev/manyroads/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend-async/src/main/java/dev/manyroads/config/ProjectConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend-async/src/main/java/dev/manyroads/config/UserConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend-async/src/main/java/dev/manyroads/config/WebfluxSecurityConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend-async/src/main/java/dev/manyroads/controllers/AuthController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend-async/src/main/java/dev/manyroads/controllers/TestController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend-async/src/main/java/dev/manyroads/exceptions/BadCredentialsException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend-async/src/main/java/dev/manyroads/exceptions/ExpiredRefreshTokenException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend-async/src/main/java/dev/manyroads/exceptions/GlobalControllerExceptionHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend-async/src/main/java/dev/manyroads/exceptions/HttpErrorInfo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend-async/src/main/java/dev/manyroads/exceptions/NotFoundException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend-async/src/main/java/dev/manyroads/jwt/AuthEntryPoint.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend-async/src/main/java/dev/manyroads/jwt/JwtFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend-async/src/main/java/dev/manyroads/jwt/JwtUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend-async/src/main/java/dev/manyroads/models/ERole.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend-async/src/main/java/dev/manyroads/models/RefreshToken.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend-async/src/main/java/dev/manyroads/models/Role.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend-async/src/main/java/dev/manyroads/models/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend-async/src/main/java/dev/manyroads/payloads/JwtResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend-async/src/main/java/dev/manyroads/payloads/LoginRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend-async/src/main/java/dev/manyroads/payloads/TokenRefreshRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend-async/src/main/java/dev/manyroads/repositories/RefreshTokenRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend-async/src/main/java/dev/manyroads/repositories/UserRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend-async/src/main/java/dev/manyroads/service/AuthService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend-async/src/main/java/dev/manyroads/service/UserDetailsImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend-async/src/main/java/dev/manyroads/service/UserDetailsServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend-async/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/dev/manroads/security/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/dev/manroads/security/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/Dashboard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Dashboard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/Login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Login.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/LoginJava.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/LoginJava.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,11 +47,10 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo">{
-  &quot;customColor&quot;: &quot;&quot;,
-  &quot;associatedIndex&quot;: 5
-}</component>
-  <component name="ProjectId" id="2Yng9sGhXiauJiwEsdRuOHfCUNd" />
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 5
+}]]></component>
+  <component name="ProjectId" id="2aiB6UFZjdS10g95G2jUk5sqyyB" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -35,18 +59,31 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "E:/GitHub/Building-Blocks/Spring-Boot-with-JWT-Authentication/backend"
+    "last_opened_file_path": "E:/GitHub/Building-Blocks/Spring-Boot-with-JWT-Authentication/backend-async"
   }
 }]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="86a66c9f-247d-4d68-8abc-3b34f2c091cc" name="Changes" comment="" />
-      <created>1701166612106</created>
+      <changelist id="0db27b02-5508-4bfe-8ba8-17ed3d9179a8" name="Changes" comment="" />
+      <created>1704791343823</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1701166612106</updated>
+      <updated>1704791343823</updated>
     </task>
+    <task id="LOCAL-00001" summary="Directory name change to backend-sync">
+      <option name="closed" value="true" />
+      <created>1704792514231</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1704792514231</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Directory name change to backend-sync" />
+    <option name="LAST_COMMIT_MESSAGE" value="Directory name change to backend-sync" />
   </component>
 </project>
