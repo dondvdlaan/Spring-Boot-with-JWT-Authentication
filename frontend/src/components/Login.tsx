@@ -38,14 +38,14 @@ export const Login = (props: Props) => {
 
                     console.log("Succesful login resp.data: ", resp.data)
                     // Create the localStorage for jwt token
-                    localStorage.setItem("jwt", resp.data.token);
+                    localStorage.setItem("jwt", resp.data.jwtToken);
 
                     // Create the localStorage for refreshToken
                     localStorage.setItem("refreshToken", resp.data.refreshToken);
 
                     // Respond to setToken in requesting page
-                    props.setToken(resp.data.token)
-                    props.setToken(resp.data["token"])
+                    props.setToken(resp.data.jwtToken)
+                    props.setToken(resp.data["jwtToken"])
                     // Refresh page so that requesting page checks login
                     //navigate(0)
 

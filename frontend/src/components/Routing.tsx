@@ -4,10 +4,8 @@ import { Login } from "./Login";
 import { Dashboard } from "./Dashboard";
 
 
-/**
- * Routing function, connecting path to modules
- * To be sure
- */
+
+
 export default function Routing(): ReactElement {
     return (
         <Routes>
