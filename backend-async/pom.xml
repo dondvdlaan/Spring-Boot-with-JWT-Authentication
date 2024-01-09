@@ -11,15 +11,17 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
-    <groupId>org.example</groupId>
-    <artifactId>MinimumWebFluxSecurity</artifactId>
+    <groupId>dev.manyroads</groupId>
+    <artifactId>backend-async</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <name>backend-async</name>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
